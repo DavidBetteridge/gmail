@@ -31,7 +31,7 @@ def send_test_email():
   credentials = google.oauth2.credentials.Credentials(**stored_creds)
 
   message = MIMEText("this is the body")
-  message['to'] = "david+gmail@hivemap.io"
+  message['to'] = "example@gmail.com"
   message['from'] = ""  # This is ignored
   message['subject'] = "this is the subject"
   raw = base64.urlsafe_b64encode(message.as_bytes())

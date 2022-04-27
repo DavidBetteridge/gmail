@@ -42,8 +42,8 @@ def test_api_request():
       **flask.session['credentials'])
 
   message = MIMEText("This is a test message")
-  message['to'] = "david@hivemap.io"
-  message['from'] = "davidabetteridge@gmail.com"
+  message['to'] = "example@gmail.com"
+  message['from'] = ""
   message['subject'] = "A test message"
   raw = base64.urlsafe_b64encode(message.as_bytes())
   raw = raw.decode()
