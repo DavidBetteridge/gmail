@@ -11,10 +11,11 @@ Originally I tried creating a service account.  This I believe will allow you to
 
 I also researched if google supported personal access tokens (PAT) and they don't seem to.
 
-This left me with the option of using OAuth2.  This is bit more complicated as you need to create a web application in order for the user to approve the access.  However,  as the user was me it meant I could take a couple of "short-cuts"
+This left me with the option of using OAuth2.  This is bit more complicated as you need to create a web application (or desktop application) in order for the user to approve the access.  However,  as the user was me it meant I could take a couple of "short-cuts"
 
+## Getting consent via a web application
 
-## Configuration in the Google Cloud Console
+### Configuration in the Google Cloud Console
 
 1. Setup a new project in google
 
@@ -36,7 +37,7 @@ As we aren't going to publish the application,  we need to explicitly specify th
 * Click + ADD USERS and add your user.  e.g.  example@gmail.com
 
 
-## Flask Application
+### Flask Application
 * Open a shell prompt and navigate into the same folder as this file.  Then run the following
 commands to create a virtual environment and install the required packages.
 
@@ -59,7 +60,7 @@ pip install -r requirements.txt
 * Open the site in a browser,  and ignore the certificate warning.  This is because we are running on a local machine with a self-signed certificate.  (DO NOT DO THIS IF YOU DEPLOY THIS SITE IN THE REAL WORLD!) 
 
 
-## Getting user consent
+### Getting user consent
 
 * From the web page select the "Test the auth flow directly" option.
 
@@ -76,7 +77,7 @@ pip install -r requirements.txt
 2. Created a file in this folder called `persisted_credentials.json`  (DO NOT ADD THIS FILE TO GIT)
 
 
-## Sending emails
+### Sending emails
 
 If everything has been correctly configured then the file `send_email_test.py` can be used to send emails.  
 
@@ -85,17 +86,17 @@ If everything has been correctly configured then the file `send_email_test.py` c
 * Run the file.
 
 
-## Persisted_credentials.json
+### Persisted_credentials.json
 
 Currently we are using the token for calling the API in a file.  This might be better written to the database.  When the token expires it will be automatically refreshed.  The database will then have to be updated with the new token.
 
 
+## Getting consent via a desktop application
 
-
-
-
+TODO
 
 
 ## References
-
+https://developers.google.com/gmail/api/v1/reference/users/messages/send
 https://developers.google.com/identity/protocols/oauth2/web-server
+https://developers.google.com/gmail/api/quickstart/python
