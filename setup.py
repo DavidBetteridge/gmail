@@ -2,6 +2,7 @@
 
 import base64
 from email.mime.text import MIMEText
+import json
 import os
 import flask
 import requests
@@ -13,7 +14,7 @@ import googleapiclient.discovery
 # This variable specifies the name of a file that contains the OAuth 2.0
 # information for this application, including its client_id and client_secret.
 CLIENT_SECRETS_FILE = "client_secret.json"
-
+ 
 # This OAuth 2.0 access scope allows for full read/write access to the
 # authenticated user's account and requires requests to use an SSL connection.
 SCOPES = ['https://www.googleapis.com/auth/gmail.send']
@@ -26,6 +27,10 @@ app = flask.Flask(__name__)
 # key. See https://flask.palletsprojects.com/quickstart/#sessions.
 app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 
+
+def __persist_credentials(credentials: dict):
+  with open("persisted_credentials.json", "w") as f:
+    f.write(json.dumps(credentials))
 
 @app.route('/')
 def index():
@@ -56,9 +61,9 @@ def test_api_request():
             .execute())  
 
   # Save credentials back to session in case access token was refreshed.
-  # ACTION ITEM: In a production app, you likely want to save these
-  #              credentials in a persistent database instead.
   flask.session['credentials'] = credentials_to_dict(credentials)
+  
+  __persist_credentials(flask.session['credentials'])
 
   return flask.jsonify({"status": "success", "message": message})
 

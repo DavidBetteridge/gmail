@@ -36,6 +36,65 @@ As we aren't going to publish the application,  we need to explicitly specify th
 * Click + ADD USERS and add your user.  e.g.  example@gmail.com
 
 
+## Flask Application
+* Open a shell prompt and navigate into the same folder as this file.  Then run the following
+commands to create a virtual environment and install the required packages.
+
+```shell
+pip install virtualenv 
+
+virtualenv venv
+
+venv\Scripts\activate
+
+venv\Scripts\python.exe -m pip install --upgrade pip
+
+pip install -r requirements.txt
+```
+
+* Once the packages have been installed, run `setup.py`
+
+* This will start the flask web server running which you can access on https://localhost:9000
+
+* Open the site in a browser,  and ignore the certificate warning.  This is because we are running on a local machine with a self-signed certificate.  (DO NOT DO THIS IF YOU DEPLOY THIS SITE IN THE REAL WORLD!) 
+
+
+## Getting user consent
+
+* From the web page select the "Test the auth flow directly" option.
+
+* This should take you to a page where you can select the user you want to send the email on behalf of.
+
+* The following page will give a warning as the application hasn't been verified by google.  Again we can ignore this as we aren't going to deploy this application.  Click continue.
+
+* Google will then warn you what permissions you are granting.  In our case the ability to send an email.  Click Continue.
+
+* If successful this should have done two things.
+
+1. Sent an test email from you to the email address specified on line 50.  (example@gmail.com)
+
+2. Created a file in this folder called `persisted_credentials.json`  (DO NOT ADD THIS FILE TO GIT)
+
+
+## Sending emails
+
+If everything has been correctly configured then the file `send_email_test.py` can be used to send emails.  
+
+* On line 33 onwards enter the details of your test message.
+
+* Run the file.
+
+
+## Persisted_credentials.json
+
+Currently we are using the token for calling the API in a file.  This might be better written to the database.  When the token expires it will be automatically refreshed.  The database will then have to be updated with the new token.
+
+
+
+
+
+
+
 
 ## References
 
